@@ -1,5 +1,6 @@
 import express from "express";
 import dontenv from "dotenv";
+import cors from "cors";
 
 dontenv.config();
 
@@ -14,9 +15,9 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.use("/api/v1/game-sessions", gameSessions);
-
-app.use(errorHandler);
+app.use(cors());
 
 app.listen(PORT, () => console.log(`Server started from port: ${PORT}`));
+
+app.use("/api/v1/game-sessions", gameSessions);
+app.use(errorHandler);
